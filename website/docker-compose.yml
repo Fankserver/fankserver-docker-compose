@@ -13,9 +13,9 @@ services:
     networks:
       - fankserver
   mongo:
-    image: mongo:/data/db
+    image: mongo
     volumes:
-      - mongo:
+      - mongo:/data/db
 
 networks:
   fankserver:
