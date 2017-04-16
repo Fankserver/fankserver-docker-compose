@@ -12,6 +12,10 @@ services:
     image: fankserver/fankserver-website
     networks:
       - fankserver
+  mongo:
+    image: mongo:/data/db
+    volumes:
+      - mongo:
 
 networks:
   fankserver:
@@ -20,3 +24,7 @@ networks:
 secrets:
   fs-cli:
     file: ~/configs/fs-cli.toml
+
+volumes:
+  mongo:
+    driver: local
