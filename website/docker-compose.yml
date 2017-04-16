@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  api:
+    image: fankserver/fankserver-cli
+    command: --config /run/secrets/config.toml api
+    networks:
+      - fankserver
+    secrets:
+      - source: fs-cli
+        target: config.toml
+  website:
+    image: fankserver/fankserver-website
+    networks:
+      - fankserver
+
+networks:
+  fankserver:
+    driver: overlay
+
+secrets:
+  fs-cli:
+    file: ~/configs/fs-cli.toml
