@@ -1,0 +1,11 @@
+{
+    "url": "http://fankserver.com:4567",
+    "secret": "2dfe0eae-5071-446f-994c-18b702c50fcd",
+    "database": "mongo",
+    "port": 4567,
+    "mongo": {
+        "host": "mongo",
+        "port": 27017,
+        "database": "nodebb"
+    }
+}

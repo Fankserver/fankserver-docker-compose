@@ -1,0 +1,28 @@
+version: '3.1'
+services:
+  nodebb:
+    image: fankserver/nodebb
+    command: sh -c "./nodebb setup && ./nodebb start"
+    networks:
+      - forum
+    volumes:
+      - ./config.json:/usr/src/app/config.json
+      - uploads:/usr/src/app/public/uploads
+    ports:
+      - 4567:4567
+  mongo:
+    image: mongo
+    networks:
+      - forum
+    volumes:
+      - mongo:/data/db
+
+networks:
+  forum:
+    driver: overlay
+
+volumes:
+  mongo:
+    driver: local
+  uploads:
+    driver: local

@@ -1,0 +1,24 @@
+networks:
+  forum:
+    driver: overlay
+services:
+  mongo:
+    image: mongo
+    networks:
+      forum: null
+    volumes:
+    - mongo:/data/db:rw
+  nodebb:
+    command: sh -c "./nodebb setup && ./nodebb start"
+    image: fankserver/nodebb
+    networks:
+      forum: null
+    ports:
+    - 4567:4567/tcp
+    volumes:
+    - /home/fank/repos/fankserver-docker-compose/forum/config.json:/usr/src/app/config.json:rw
+version: '3.1'
+volumes:
+  mongo:
+    driver: local
+
