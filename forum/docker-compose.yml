@@ -2,12 +2,11 @@ version: '3.1'
 services:
   nodebb:
     image: fankserver/nodebb
-    command: sh -c "./nodebb setup && ./nodebb start"
     networks:
       - forum
     volumes:
-      - ./config.json:/usr/src/app/config.json
-      - uploads:/usr/src/app/public/uploads
+      - app:/usr/src/app
+      - uploads:/uploads
     ports:
       - 4567:4567
   mongo:
@@ -23,6 +22,8 @@ networks:
 
 volumes:
   mongo:
+    driver: local
+  app:
     driver: local
   uploads:
     driver: local
