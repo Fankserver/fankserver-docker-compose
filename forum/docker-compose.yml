@@ -6,7 +6,6 @@ services:
       - forum
     volumes:
       - app:/usr/src/app
-      - uploads:/uploads
     ports:
       - 4567:4567
   mongo:
@@ -24,6 +23,4 @@ volumes:
   mongo:
     driver: local
   app:
-    driver: local
-  uploads:
     driver: local
