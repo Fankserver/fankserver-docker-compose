@@ -1,0 +1,34 @@
+version: '3.3'
+services:
+  server:
+    image: gizmotronic/openfire:4.1.5
+    networks:
+      - xmpp
+    ports:
+      - 5222:5222
+      - 5262:5262
+      - 5269:5269
+      - 7070:7070
+      - 7443:7443
+      - 7777:7777
+    volumes:
+      - data:/var/lib/openfire
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: openfire
+      POSTGRES_PASSWORD: ASD
+    networks:
+      - xmpp
+    volumes:
+      - db:/var/lib/postgresql/data
+
+networks:
+  xmpp:
+    driver: overlay
+
+volumes:
+  data:
+    driver: local
+  db:
+    driver: local
