@@ -1,20 +1,22 @@
 version: '3.3'
 services:
   devserver:
-    image: node:8
+    image: rastasheep/ubuntu-sshd:16.04
     networks:
       - vc
+      - traefik
     deploy:
       labels:
         traefik.docker.network: traefik
         traefik.port: 4200
         traefik.frontend.rule: Host:ets2.virtual-company.de
   devserver2:
-    image: node:8
+    image: rastasheep/ubuntu-sshd:16.04
     networks:
       - vc
+      - traefik
     ports:
-      - 62222:22
+      - 8888:22
     volumes:
       - data:/usr/src/
     deploy:
