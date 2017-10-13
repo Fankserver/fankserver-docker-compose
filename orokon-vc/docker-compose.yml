@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  devserver:
+    image: node:8
+    networks:
+      - vc
+    deploy:
+      labels:
+        traefik.docker.network: traefik
+        traefik.port: 4200
+        traefik.frontend.rule: Host:ets2.virtual-company.de
+  devserver2:
+    image: node:8
+    networks:
+      - vc
+    ports:
+      - 62222:22
+    volumes:
+      - data:/usr/src/
+    deploy:
+      labels:
+        traefik.docker.network: traefik
+        traefik.port: 4200
+        traefik.frontend.rule: Host:ets2-dev.virtual-company.de
+  mongo:
+    image: mongo:3.5
+    networks:
+      - vc
+    volumes:
+      - db:/data/db
+
+networks:
+  vc:
+    driver: overlay
+  traefik:
+    external: true
+
+volumes:
+  data:
+    driver: local
+  db:
+    driver: local
